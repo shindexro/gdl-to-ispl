@@ -2,16 +2,13 @@
 grammar GDL;
 
 description
-    : (gdlRule | comment)*
+    : gdlRule*
     ;
 
 gdlRule
     : '(<=' literal+ ')'
     | literal
     ;
-
-comment
-    : COMMENT;
 
 literal
     : '(' literal ')'

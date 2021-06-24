@@ -27,16 +27,6 @@ public interface GDLListener extends ParseTreeListener {
 	 */
 	void exitGdlRule(GDLParser.GdlRuleContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GDLParser#comment}.
-	 * @param ctx the parse tree
-	 */
-	void enterComment(GDLParser.CommentContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GDLParser#comment}.
-	 * @param ctx the parse tree
-	 */
-	void exitComment(GDLParser.CommentContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GDLParser#literal}.
 	 * @param ctx the parse tree
 	 */

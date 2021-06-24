@@ -19,13 +19,13 @@ public class GDLParser extends Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, CONST=8, COMMENT=9, 
 		WS=10;
 	public static final int
-		RULE_description = 0, RULE_gdlRule = 1, RULE_comment = 2, RULE_literal = 3, 
-		RULE_notLiteral = 4, RULE_orLiteral = 5, RULE_distinctLiteral = 6, RULE_propositionLiteral = 7, 
-		RULE_relationLiteral = 8, RULE_term = 9, RULE_var = 10;
+		RULE_description = 0, RULE_gdlRule = 1, RULE_literal = 2, RULE_notLiteral = 3, 
+		RULE_orLiteral = 4, RULE_distinctLiteral = 5, RULE_propositionLiteral = 6, 
+		RULE_relationLiteral = 7, RULE_term = 8, RULE_var = 9;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"description", "gdlRule", "comment", "literal", "notLiteral", "orLiteral", 
-			"distinctLiteral", "propositionLiteral", "relationLiteral", "term", "var"
+			"description", "gdlRule", "literal", "notLiteral", "orLiteral", "distinctLiteral", 
+			"propositionLiteral", "relationLiteral", "term", "var"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -99,12 +99,6 @@ public class GDLParser extends Parser {
 		public GdlRuleContext gdlRule(int i) {
 			return getRuleContext(GdlRuleContext.class,i);
 		}
-		public List<CommentContext> comment() {
-			return getRuleContexts(CommentContext.class);
-		}
-		public CommentContext comment(int i) {
-			return getRuleContext(CommentContext.class,i);
-		}
 		public DescriptionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -126,36 +120,17 @@ public class GDLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(26);
+			setState(23);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__5) | (1L << CONST) | (1L << COMMENT))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__5) | (1L << CONST))) != 0)) {
 				{
-				setState(24);
-				_errHandler.sync(this);
-				switch (_input.LA(1)) {
-				case T__0:
-				case T__2:
-				case T__3:
-				case T__4:
-				case T__5:
-				case CONST:
-					{
-					setState(22);
-					gdlRule();
-					}
-					break;
-				case COMMENT:
-					{
-					setState(23);
-					comment();
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				{
+				setState(20);
+				gdlRule();
 				}
 				}
-				setState(28);
+				setState(25);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -198,29 +173,29 @@ public class GDLParser extends Parser {
 		enterRule(_localctx, 2, RULE_gdlRule);
 		int _la;
 		try {
-			setState(38);
+			setState(35);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__0:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(29);
+				setState(26);
 				match(T__0);
-				setState(31); 
+				setState(28); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(30);
+					setState(27);
 					literal();
 					}
 					}
-					setState(33); 
+					setState(30); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__5) | (1L << CONST))) != 0) );
-				setState(35);
+				setState(32);
 				match(T__1);
 				}
 				break;
@@ -231,49 +206,12 @@ public class GDLParser extends Parser {
 			case CONST:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(37);
+				setState(34);
 				literal();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class CommentContext extends ParserRuleContext {
-		public TerminalNode COMMENT() { return getToken(GDLParser.COMMENT, 0); }
-		public CommentContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_comment; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GDLListener ) ((GDLListener)listener).enterComment(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GDLListener ) ((GDLListener)listener).exitComment(this);
-		}
-	}
-
-	public final CommentContext comment() throws RecognitionException {
-		CommentContext _localctx = new CommentContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_comment);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(40);
-			match(COMMENT);
 			}
 		}
 		catch (RecognitionException re) {
@@ -322,54 +260,54 @@ public class GDLParser extends Parser {
 
 	public final LiteralContext literal() throws RecognitionException {
 		LiteralContext _localctx = new LiteralContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_literal);
+		enterRule(_localctx, 4, RULE_literal);
 		try {
-			setState(51);
+			setState(46);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(42);
+				setState(37);
 				match(T__2);
-				setState(43);
+				setState(38);
 				literal();
-				setState(44);
+				setState(39);
 				match(T__1);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(46);
+				setState(41);
 				notLiteral();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(47);
+				setState(42);
 				orLiteral();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(48);
+				setState(43);
 				distinctLiteral();
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(49);
+				setState(44);
 				propositionLiteral();
 				}
 				break;
 			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(50);
+				setState(45);
 				relationLiteral();
 				}
 				break;
@@ -406,13 +344,13 @@ public class GDLParser extends Parser {
 
 	public final NotLiteralContext notLiteral() throws RecognitionException {
 		NotLiteralContext _localctx = new NotLiteralContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_notLiteral);
+		enterRule(_localctx, 6, RULE_notLiteral);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(53);
+			setState(48);
 			match(T__3);
-			setState(54);
+			setState(49);
 			literal();
 			}
 		}
@@ -450,16 +388,16 @@ public class GDLParser extends Parser {
 
 	public final OrLiteralContext orLiteral() throws RecognitionException {
 		OrLiteralContext _localctx = new OrLiteralContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_orLiteral);
+		enterRule(_localctx, 8, RULE_orLiteral);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(56);
+			setState(51);
 			match(T__4);
-			setState(57);
+			setState(52);
 			literal();
-			setState(59); 
+			setState(54); 
 			_errHandler.sync(this);
 			_alt = 1;
 			do {
@@ -467,7 +405,7 @@ public class GDLParser extends Parser {
 				case 1:
 					{
 					{
-					setState(58);
+					setState(53);
 					literal();
 					}
 					}
@@ -475,9 +413,9 @@ public class GDLParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(61); 
+				setState(56); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 			}
 		}
@@ -515,15 +453,15 @@ public class GDLParser extends Parser {
 
 	public final DistinctLiteralContext distinctLiteral() throws RecognitionException {
 		DistinctLiteralContext _localctx = new DistinctLiteralContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_distinctLiteral);
+		enterRule(_localctx, 10, RULE_distinctLiteral);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(63);
+			setState(58);
 			match(T__5);
-			setState(64);
+			setState(59);
 			term();
-			setState(65);
+			setState(60);
 			term();
 			}
 		}
@@ -556,11 +494,11 @@ public class GDLParser extends Parser {
 
 	public final PropositionLiteralContext propositionLiteral() throws RecognitionException {
 		PropositionLiteralContext _localctx = new PropositionLiteralContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_propositionLiteral);
+		enterRule(_localctx, 12, RULE_propositionLiteral);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(67);
+			setState(62);
 			match(CONST);
 			}
 		}
@@ -599,14 +537,14 @@ public class GDLParser extends Parser {
 
 	public final RelationLiteralContext relationLiteral() throws RecognitionException {
 		RelationLiteralContext _localctx = new RelationLiteralContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_relationLiteral);
+		enterRule(_localctx, 14, RULE_relationLiteral);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(69);
+			setState(64);
 			match(CONST);
-			setState(71); 
+			setState(66); 
 			_errHandler.sync(this);
 			_alt = 1;
 			do {
@@ -614,7 +552,7 @@ public class GDLParser extends Parser {
 				case 1:
 					{
 					{
-					setState(70);
+					setState(65);
 					term();
 					}
 					}
@@ -622,9 +560,9 @@ public class GDLParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(73); 
+				setState(68); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 			}
 		}
@@ -666,40 +604,40 @@ public class GDLParser extends Parser {
 
 	public final TermContext term() throws RecognitionException {
 		TermContext _localctx = new TermContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_term);
+		enterRule(_localctx, 16, RULE_term);
 		try {
-			setState(82);
+			setState(77);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(75);
+				setState(70);
 				match(T__2);
-				setState(76);
+				setState(71);
 				term();
-				setState(77);
+				setState(72);
 				match(T__1);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(79);
+				setState(74);
 				var();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(80);
+				setState(75);
 				match(CONST);
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(81);
+				setState(76);
 				relationLiteral();
 				}
 				break;
@@ -734,13 +672,13 @@ public class GDLParser extends Parser {
 
 	public final VarContext var() throws RecognitionException {
 		VarContext _localctx = new VarContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_var);
+		enterRule(_localctx, 18, RULE_var);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(84);
+			setState(79);
 			match(T__6);
-			setState(85);
+			setState(80);
 			match(CONST);
 			}
 		}
@@ -756,29 +694,27 @@ public class GDLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\fZ\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4"+
-		"\f\t\f\3\2\3\2\7\2\33\n\2\f\2\16\2\36\13\2\3\3\3\3\6\3\"\n\3\r\3\16\3"+
-		"#\3\3\3\3\3\3\5\3)\n\3\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5\5"+
-		"\66\n\5\3\6\3\6\3\6\3\7\3\7\3\7\6\7>\n\7\r\7\16\7?\3\b\3\b\3\b\3\b\3\t"+
-		"\3\t\3\n\3\n\6\nJ\n\n\r\n\16\nK\3\13\3\13\3\13\3\13\3\13\3\13\3\13\5\13"+
-		"U\n\13\3\f\3\f\3\f\3\f\2\2\r\2\4\6\b\n\f\16\20\22\24\26\2\2\2\\\2\34\3"+
-		"\2\2\2\4(\3\2\2\2\6*\3\2\2\2\b\65\3\2\2\2\n\67\3\2\2\2\f:\3\2\2\2\16A"+
-		"\3\2\2\2\20E\3\2\2\2\22G\3\2\2\2\24T\3\2\2\2\26V\3\2\2\2\30\33\5\4\3\2"+
-		"\31\33\5\6\4\2\32\30\3\2\2\2\32\31\3\2\2\2\33\36\3\2\2\2\34\32\3\2\2\2"+
-		"\34\35\3\2\2\2\35\3\3\2\2\2\36\34\3\2\2\2\37!\7\3\2\2 \"\5\b\5\2! \3\2"+
-		"\2\2\"#\3\2\2\2#!\3\2\2\2#$\3\2\2\2$%\3\2\2\2%&\7\4\2\2&)\3\2\2\2\')\5"+
-		"\b\5\2(\37\3\2\2\2(\'\3\2\2\2)\5\3\2\2\2*+\7\13\2\2+\7\3\2\2\2,-\7\5\2"+
-		"\2-.\5\b\5\2./\7\4\2\2/\66\3\2\2\2\60\66\5\n\6\2\61\66\5\f\7\2\62\66\5"+
-		"\16\b\2\63\66\5\20\t\2\64\66\5\22\n\2\65,\3\2\2\2\65\60\3\2\2\2\65\61"+
-		"\3\2\2\2\65\62\3\2\2\2\65\63\3\2\2\2\65\64\3\2\2\2\66\t\3\2\2\2\678\7"+
-		"\6\2\289\5\b\5\29\13\3\2\2\2:;\7\7\2\2;=\5\b\5\2<>\5\b\5\2=<\3\2\2\2>"+
-		"?\3\2\2\2?=\3\2\2\2?@\3\2\2\2@\r\3\2\2\2AB\7\b\2\2BC\5\24\13\2CD\5\24"+
-		"\13\2D\17\3\2\2\2EF\7\n\2\2F\21\3\2\2\2GI\7\n\2\2HJ\5\24\13\2IH\3\2\2"+
-		"\2JK\3\2\2\2KI\3\2\2\2KL\3\2\2\2L\23\3\2\2\2MN\7\5\2\2NO\5\24\13\2OP\7"+
-		"\4\2\2PU\3\2\2\2QU\5\26\f\2RU\7\n\2\2SU\5\22\n\2TM\3\2\2\2TQ\3\2\2\2T"+
-		"R\3\2\2\2TS\3\2\2\2U\25\3\2\2\2VW\7\t\2\2WX\7\n\2\2X\27\3\2\2\2\n\32\34"+
-		"#(\65?KT";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\fU\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\3"+
+		"\2\7\2\30\n\2\f\2\16\2\33\13\2\3\3\3\3\6\3\37\n\3\r\3\16\3 \3\3\3\3\3"+
+		"\3\5\3&\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4\61\n\4\3\5\3\5\3\5"+
+		"\3\6\3\6\3\6\6\69\n\6\r\6\16\6:\3\7\3\7\3\7\3\7\3\b\3\b\3\t\3\t\6\tE\n"+
+		"\t\r\t\16\tF\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\nP\n\n\3\13\3\13\3\13\3\13"+
+		"\2\2\f\2\4\6\b\n\f\16\20\22\24\2\2\2W\2\31\3\2\2\2\4%\3\2\2\2\6\60\3\2"+
+		"\2\2\b\62\3\2\2\2\n\65\3\2\2\2\f<\3\2\2\2\16@\3\2\2\2\20B\3\2\2\2\22O"+
+		"\3\2\2\2\24Q\3\2\2\2\26\30\5\4\3\2\27\26\3\2\2\2\30\33\3\2\2\2\31\27\3"+
+		"\2\2\2\31\32\3\2\2\2\32\3\3\2\2\2\33\31\3\2\2\2\34\36\7\3\2\2\35\37\5"+
+		"\6\4\2\36\35\3\2\2\2\37 \3\2\2\2 \36\3\2\2\2 !\3\2\2\2!\"\3\2\2\2\"#\7"+
+		"\4\2\2#&\3\2\2\2$&\5\6\4\2%\34\3\2\2\2%$\3\2\2\2&\5\3\2\2\2\'(\7\5\2\2"+
+		"()\5\6\4\2)*\7\4\2\2*\61\3\2\2\2+\61\5\b\5\2,\61\5\n\6\2-\61\5\f\7\2."+
+		"\61\5\16\b\2/\61\5\20\t\2\60\'\3\2\2\2\60+\3\2\2\2\60,\3\2\2\2\60-\3\2"+
+		"\2\2\60.\3\2\2\2\60/\3\2\2\2\61\7\3\2\2\2\62\63\7\6\2\2\63\64\5\6\4\2"+
+		"\64\t\3\2\2\2\65\66\7\7\2\2\668\5\6\4\2\679\5\6\4\28\67\3\2\2\29:\3\2"+
+		"\2\2:8\3\2\2\2:;\3\2\2\2;\13\3\2\2\2<=\7\b\2\2=>\5\22\n\2>?\5\22\n\2?"+
+		"\r\3\2\2\2@A\7\n\2\2A\17\3\2\2\2BD\7\n\2\2CE\5\22\n\2DC\3\2\2\2EF\3\2"+
+		"\2\2FD\3\2\2\2FG\3\2\2\2G\21\3\2\2\2HI\7\5\2\2IJ\5\22\n\2JK\7\4\2\2KP"+
+		"\3\2\2\2LP\5\24\13\2MP\7\n\2\2NP\5\20\t\2OH\3\2\2\2OL\3\2\2\2OM\3\2\2"+
+		"\2ON\3\2\2\2P\23\3\2\2\2QR\7\t\2\2RS\7\n\2\2S\25\3\2\2\2\t\31 %\60:FO";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
