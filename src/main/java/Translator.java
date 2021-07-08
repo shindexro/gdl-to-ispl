@@ -34,7 +34,9 @@ public class Translator {
         PropNetFlattener pf = new PropNetFlattener(description);
         List<GdlRule> flatDescription = pf.flatten();
 
-        String isplDescription = IsplDescriptionFactory.create(flatDescription);
+        IsplDescriptionFactory isplFactory = new IsplDescriptionFactory(flatDescription);
+        String isplDescription = isplFactory.build();
+        System.out.println(isplDescription);
         File outFile = new File("ticTacToe.ispl");
         FileUtils.writeStringToFile(outFile, isplDescription);
     }
