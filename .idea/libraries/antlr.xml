@@ -1,0 +1,41 @@
+<component name="libraryTable">
+  <library name="antlr">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/Batik/batik-1.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Batik/xml-apis-ext.jar!/" />
+      <root url="file://$PROJECT_DIR$/lib/antlr" />
+      <root url="file://$PROJECT_DIR$/lib/Batik" />
+      <root url="file://$PROJECT_DIR$/lib/Clojure" />
+      <root url="file://$PROJECT_DIR$/lib/FlyingSaucer" />
+      <root url="file://$PROJECT_DIR$/lib/gdl-validation" />
+      <root url="file://$PROJECT_DIR$/lib/Guava" />
+      <root url="file://$PROJECT_DIR$/lib/Htmlparser" />
+      <root url="file://$PROJECT_DIR$/lib/javassist" />
+      <root url="file://$PROJECT_DIR$/lib/JFreeChart" />
+      <root url="file://$PROJECT_DIR$/lib/JGoodiesForms" />
+      <root url="file://$PROJECT_DIR$/lib/JUnit" />
+      <root url="file://$PROJECT_DIR$/lib/Jython" />
+      <root url="file://$PROJECT_DIR$/lib/reflections" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/lib/gdl-validation" />
+      <root url="file://$PROJECT_DIR$/lib/Guava" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/lib/antlr" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/Batik" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/Clojure" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/FlyingSaucer" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/gdl-validation" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/Guava" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/Htmlparser" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/javassist" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/JFreeChart" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/JGoodiesForms" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/JUnit" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/Jython" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/reflections" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/gdl-validation" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/Guava" recursive="false" type="SOURCES" />
+  </library>
+</component>

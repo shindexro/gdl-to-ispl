@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="antlr-4.9.2-complete">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/antlr-4.9.2-complete.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/gdl-validation-0.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/ggp-base.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/guava-14.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/java-cup-11b-runtime-2015.03.26.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/gdl-validation-0.2.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/guava-14.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
