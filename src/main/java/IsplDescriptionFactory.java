@@ -111,7 +111,7 @@ public class IsplDescriptionFactory {
         append("    dummyvar : boolean;\n");
         append("  end Obsvars\n");
         append("  Vars:\n  end Vars\n");
-        append("  RedStates:\n    ").append(terminalCondition.replace("Environment.", "")).append("\n  end RedStates\n");
+        append("  RedStates:\n    ").append(terminalCondition.replace("Environment.", "")).append(";\n  end RedStates\n");
         append("  Actions={noop};\n  Protocol:\n  end Protocol\n");
 
         append("  Evolution:\n");
@@ -134,7 +134,6 @@ public class IsplDescriptionFactory {
                 sb.append(" or ");
             sb.append("( ").append(expandLiterals(r.getBody(), relations)).append(" )");
         }
-        sb.append(" ;");
         terminalCondition = sb.toString();
     }
 
