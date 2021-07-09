@@ -36,7 +36,6 @@ public class Translator {
 
         IsplDescriptionFactory isplFactory = new IsplDescriptionFactory(flatDescription);
         String isplDescription = isplFactory.build();
-        System.out.println(isplDescription);
         File outFile = new File("ticTacToe.ispl");
         FileUtils.writeStringToFile(outFile, isplDescription);
     }

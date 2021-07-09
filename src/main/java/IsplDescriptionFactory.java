@@ -84,7 +84,7 @@ public class IsplDescriptionFactory {
         for (GdlRule r : goals) {
             GdlSentence head = r.getHead();
             List<GdlLiteral> body = r.getBody();
-            append(String.format("  %s if %s; \n", translateSentence(head), expandLiterals(body, relations)));
+            append(String.format("  %s if %s; \n", translateSentence(head), expandLiterals(body)));
         }
         append("end Evaluation\n\n");
     }
@@ -117,7 +117,7 @@ public class IsplDescriptionFactory {
         append("  Evolution:\n");
         for (Map.Entry<String, List<String>> entry : propToNextRuleConditions.entrySet()) {
             String prop = entry.getKey();
-            String condition = String.join(" or ", entry.getValue()).replace("Environment.", "");
+            String condition = "(" + String.join(") or (", entry.getValue()).replace("Environment.", "") + ")";
             append(String.format("    %s=true if %s ;\n", prop, condition));
             append(String.format("    %s=false if !( %s ) ;\n", prop, condition));
         }
@@ -128,13 +128,17 @@ public class IsplDescriptionFactory {
     }
 
     private void setTerminalCondition() {
-        StringBuilder sb = new StringBuilder();
+        List<String> clauses = new ArrayList<>();
         for (GdlRule r : terminals) {
-            if (sb.length() > 0)
-                sb.append(" or ");
-            sb.append("( ").append(expandLiterals(r.getBody(), relations)).append(" )");
+            String exlit = expandLiterals(r.getBody());
+            if (exlit.equals("TRUE")) {
+                terminalCondition = "(Environment.dummyvar = Environment.dummyvar)";
+                return;
+            }
+            if (!exlit.equals("FALSE"))
+                clauses.add(exlit);
         }
-        terminalCondition = sb.toString();
+        terminalCondition = "(" + String.join(") or (", clauses) + ")";
     }
 
     private void groupRules() {
@@ -201,7 +205,7 @@ public class IsplDescriptionFactory {
 
             agentProtocols.putIfAbsent(role, new ArrayList<>());
             agentProtocols.get(role).add(String.format("( !( %s ) and ( %s ) ) : { %s }",
-                    terminalCondition, expandLiterals(body, relations), action));
+                    terminalCondition, expandLiterals(body), action));
 
             agentActions.putIfAbsent(role, new HashSet<>());
             agentActions.get(role).add(action);
@@ -214,7 +218,9 @@ public class IsplDescriptionFactory {
             List<GdlLiteral> body = r.getBody();
             String prop = translateTerm(head.get(0));
             propToNextRuleConditions.putIfAbsent(prop, new ArrayList<>());
-            propToNextRuleConditions.get(prop).add(expandLiterals(body, relations));
+            String exlit = expandLiterals(body);
+            if (!exlit.equals("FALSE"))
+                propToNextRuleConditions.get(prop).add(expandLiterals(body));
         }
     }
 
@@ -236,25 +242,26 @@ public class IsplDescriptionFactory {
         return sb.toString();
     }
 
-    private static String expandLiteral(GdlLiteral literal, Map<String, Set<GdlRule>> relations) {
+    private String expandLiteral(GdlLiteral literal) {
         if (literal instanceof GdlNot) {
             GdlNot not = (GdlNot) literal;
-            return "!(" + expandLiteral(not.getBody(), relations) + ")";
+            return "!(" + expandLiteral(not.getBody()) + ")";
 
         } else if (literal instanceof GdlDistinct) {
             GdlDistinct distinct = (GdlDistinct) literal;
             String arg1 = distinct.getArg1().toString();
             String arg2 = distinct.getArg2().toString();
-            return arg1.equals(arg2) ? FALSE : TRUE;
+            return arg1.equals(arg2) ? "FALSE" : "TRUE";
 
         } else if (literal instanceof GdlOr) {
-            throw new IllegalArgumentException("Description should not contain Or rules, considering using the DeOrer");
+            throw new IllegalArgumentException("Description should not contain Or rules, considering using the DeORer");
 
         } else if (literal instanceof GdlSentence) {
             GdlSentence sentence = (GdlSentence) literal;
             String head = sentence.getName().getValue();
             if (head.equals("true")) {
-                return String.format("Environment.%s=true", translateTerm(sentence.get(0)));
+                String prop = translateTerm(sentence.get(0));
+                return basePropositions.contains(prop) ? String.format("Environment.%s=true", prop) : "FALSE";
 
             } else if (head.equals("does")) {
                 String role = sentence.get(0).toString();
@@ -262,33 +269,45 @@ public class IsplDescriptionFactory {
                 return String.format("%s.Action=%s", role, action);
 
             } else {
-                return expandCustomSentence(sentence, relations);
+                return expandCustomSentence(sentence);
             }
         }
         throw new IllegalArgumentException("Unknown literal: " + literal);
     }
 
-    private static String expandCustomSentence(GdlSentence sentence, Map<String, Set<GdlRule>> relations) {
+    private String expandCustomSentence(GdlSentence sentence) {
         String relName = translateSentence(sentence);
+        if (!relations.containsKey(relName))
+            return "FALSE";
+
         Set<GdlRule> outRules = relations.get(relName);
-        StringBuilder sb = new StringBuilder();
+        List<String> clauses = new ArrayList<>();
         for (GdlRule rule : outRules) {
-            if (sb.length() > 0)
-                sb.append(" or ");
-            sb.append(expandLiterals(rule.getBody(), relations));
+            String exlit = expandLiterals(rule.getBody());
+            if (exlit.equals("TRUE"))
+                return "TRUE";
+            if (!exlit.equals("FALSE"))
+                clauses.add(exlit);
         }
-        return sb.toString();
+
+        if (clauses.isEmpty())
+            return "TRUE";
+        else
+            return "(" + String.join(") or (", clauses) + ")";
     }
 
-    private static String expandLiterals(List<GdlLiteral> literals, Map<String, Set<GdlRule>> relations) {
-        StringBuilder sb = new StringBuilder();
-        sb.append('(');
+    private String expandLiterals(List<GdlLiteral> literals) {
+        List<String> clauses = new ArrayList<>();
         for (GdlLiteral lit : literals) {
-            if (sb.length() > 1)
-                sb.append(" and ");
-            sb.append(expandLiteral(lit, relations));
+            String exlit = expandLiteral(lit);
+            if (exlit.equals("FALSE"))
+                return "FALSE";
+            if (!exlit.equals("TRUE"))
+                clauses.add(exlit);
         }
-        sb.append(')');
-        return sb.toString();
+        if (clauses.isEmpty())
+            return "TRUE";
+        else
+            return "(" + String.join(") and (", clauses) + ")";
     }
 }
