@@ -4,9 +4,6 @@ import java.util.*;
 
 public class IsplDescriptionFactory {
 
-    private static final String TRUE = "Environment.dummyvar=Environment.dummyvar";
-    private static final String FALSE = "!(Environment.dummyvar=Environment.dummyvar)";
-
     private final List<GdlRule> flatGdlDescription;
     private final StringBuilder isplDescription;
     private String terminalCondition;
@@ -22,6 +19,7 @@ public class IsplDescriptionFactory {
     private final Set<String> initPropositions = new HashSet<>();
 
     private final Map<String, List<String>> propToNextRuleConditions = new HashMap<>();
+    private final Map<String, List<String>> goalToConditions = new HashMap<>();
     private final Map<String, Set<String>> agentActions = new HashMap<>();
     private final Map<String, List<String>> agentProtocols = new HashMap<>();
 
@@ -40,9 +38,10 @@ public class IsplDescriptionFactory {
         setTerminalCondition();
         setAgentInfo();
         setEvolutions();
+        setGoals();
 
         format();
-        return this.isplDescription.toString();
+        return this.isplDescription.toString().replace("TRUE", "dummyvar=dummyvar").replace("FALSE", "!(dummyvar=dummyvar)");
     }
 
     private void format() {
@@ -75,16 +74,16 @@ public class IsplDescriptionFactory {
     private void formatFormulae() {
         append("Formulae\n");
         append("  -- Environment.RedStates refers to terminal game states.\n");
-        append("  EF Environment.RedStates;\n");
+        append("  AF Environment.RedStates;\n");
         append("end Formulae\n\n");
     }
 
     private void formatEvaluation() {
         append("Evaluation\n");
-        for (GdlRule r : goals) {
-            GdlSentence head = r.getHead();
-            List<GdlLiteral> body = r.getBody();
-            append(String.format("  %s if %s; \n", translateSentence(head), expandLiterals(body)));
+        for (Map.Entry<String, List<String>> entry : goalToConditions.entrySet()) {
+            String prop = entry.getKey();
+            String condition = "(" + String.join(") or (", entry.getValue()) + ")";
+            append(String.format("    %s if %s ;\n", prop, condition));
         }
         append("end Evaluation\n\n");
     }
@@ -115,9 +114,9 @@ public class IsplDescriptionFactory {
         append("  Actions={noop};\n  Protocol:\n  end Protocol\n");
 
         append("  Evolution:\n");
-        for (Map.Entry<String, List<String>> entry : propToNextRuleConditions.entrySet()) {
-            String prop = entry.getKey();
-            String condition = "(" + String.join(") or (", entry.getValue()).replace("Environment.", "") + ")";
+        for (String prop : basePropositions) {
+            List<String> conditions = propToNextRuleConditions.get(prop);
+            String condition = (conditions == null) ? "!dummyvar=dummyvar" : "(" + String.join(") or (", conditions).replace("Environment.", "") + ")";
             append(String.format("    %s=true if %s ;\n", prop, condition));
             append(String.format("    %s=false if !( %s ) ;\n", prop, condition));
         }
@@ -205,7 +204,7 @@ public class IsplDescriptionFactory {
 
             agentProtocols.putIfAbsent(role, new ArrayList<>());
             agentProtocols.get(role).add(String.format("( !( %s ) and ( %s ) ) : { %s }",
-                    terminalCondition, expandLiterals(body), action));
+                    terminalCondition, expandLiterals(body), action).replace("TRUE", "dummyvar=dummyvar"));
 
             agentActions.putIfAbsent(role, new HashSet<>());
             agentActions.get(role).add(action);
@@ -221,6 +220,18 @@ public class IsplDescriptionFactory {
             String exlit = expandLiterals(body);
             if (!exlit.equals("FALSE"))
                 propToNextRuleConditions.get(prop).add(expandLiterals(body));
+        }
+    }
+
+    private void setGoals() {
+        for (GdlRule r : goals) {
+            GdlSentence head = r.getHead();
+            List<GdlLiteral> body = r.getBody();
+            String goal = translateSentence(head);
+            goalToConditions.putIfAbsent(goal, new ArrayList<>());
+            String exlit = expandLiterals(body);
+            if (!exlit.equals("FALSE"))
+                goalToConditions.get(goal).add(expandLiterals(body));
         }
     }
 
@@ -291,7 +302,7 @@ public class IsplDescriptionFactory {
         }
 
         if (clauses.isEmpty())
-            return "TRUE";
+            return "FALSE";
         else
             return "(" + String.join(") or (", clauses) + ")";
     }

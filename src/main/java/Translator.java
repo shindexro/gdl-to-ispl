@@ -13,7 +13,8 @@ import java.util.List;
 
 public class Translator {
     public static void main(String[] args) throws Exception {
-        String filename = "D:\\Study\\Year 4\\Individual Project\\gdl2ispl\\src\\main\\java\\ticTacToe.kif";
+        String gameName = "firefighter";
+        String filename = "D:\\mcmas\\mcmas-1.3.0\\gdl\\" + gameName + ".kif";
         Game theGame = Game.createEphemeralGame(Game.preprocessRulesheet(FileUtils.readFileAsString(new File(filename))));
 
         if (theGame.getRules() == null || theGame.getRules().size() == 0) {
@@ -36,7 +37,7 @@ public class Translator {
 
         IsplDescriptionFactory isplFactory = new IsplDescriptionFactory(flatDescription);
         String isplDescription = isplFactory.build();
-        File outFile = new File("ticTacToe.ispl");
+        File outFile = new File("D:\\mcmas\\mcmas-1.3.0\\gdl2ispl\\" + gameName + ".ispl");
         FileUtils.writeStringToFile(outFile, isplDescription);
     }
 }
