@@ -8,7 +8,7 @@ public class IsplDescriptionFactory {
     private final StringBuilder isplDescription;
     private String terminalCondition;
 
-    private final Set<String> roles = new HashSet<>();
+    private final List<String> roles = new ArrayList<>();
     private final Map<String, Set<GdlRule>> relations = new HashMap<>();
     private final Set<GdlRule> legals = new HashSet<>();
     private final Set<GdlRule> goals = new HashSet<>();
@@ -20,6 +20,7 @@ public class IsplDescriptionFactory {
 
     private final Map<String, List<String>> propToNextRuleConditions = new HashMap<>();
     private final Map<String, List<String>> goalToConditions = new HashMap<>();
+    private final Map<String, TreeSet<Integer>> roleToGoalRewards = new HashMap<>();
     private final Map<String, Set<String>> agentActions = new HashMap<>();
     private final Map<String, List<String>> agentProtocols = new HashMap<>();
 
@@ -52,6 +53,7 @@ public class IsplDescriptionFactory {
         }
         formatEvaluation();
         formatInitStates();
+        formatGroups();
         formatFormulae();
     }
 
@@ -71,11 +73,91 @@ public class IsplDescriptionFactory {
         append("end InitStates\n\n");
     }
 
+    private void formatGroups() {
+        append("Groups\n");
+        for (String role : roles) {
+            append(String.format("  %s = { %s } ;\n", role, role));
+        }
+        append(String.format("  allAgents = { %s } ;\n", String.join(", ", roles)));
+        append("end Groups\n\n");
+    }
+
     private void formatFormulae() {
         append("Formulae\n");
+
         append("  -- Environment.RedStates refers to terminal game states.\n");
-        append("  AF Environment.RedStates;\n");
+        append("  AF Environment.RedStates;\n\n");
+        append("  -- Fairness\n");
+        append(fairnessFormula());
+        append(" ;\n\n");
+        append("  -- Weak winnability\n");
+        append(weakWinnabilityFormula());
+        append(" ;\n\n");
+        append("  -- Strong winnability\n");
+        append(strongWinnabilityFormula());
+        append(" ;\n\n");
+        append("  -- Unique goal\n");
+        append(uniqueGoalFormula());
+        append(" ;\n\n");
         append("end Formulae\n\n");
+    }
+
+    private String uniqueGoalFormula() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("AG (Environment.RedStates -> (");
+        for (String role : roles) {
+            sb.append(roleUniqueGoal(role));
+        }
+        sb.append(") )");
+        return sb.toString();
+    }
+
+    private String roleUniqueGoal(String role) {
+        TreeSet<Integer> rewards = roleToGoalRewards.get(role);
+        List<String> clauses = new ArrayList<>();
+        for (int i = 0; i < rewards.size(); i++) {
+            clauses.add(roleNthUniqueGoal(role, i));
+        }
+        return "(" + String.join(" \nor ", clauses) + ")";
+    }
+
+    private String roleNthUniqueGoal(String role, int n) {
+        TreeSet<Integer> rewards = roleToGoalRewards.get(role);
+        Iterator<Integer> it = rewards.iterator();
+        List<String> clauses = new ArrayList<>();
+        for (int i = 0; i < rewards.size(); i++) {
+            int reward = it.next();
+            if (i == n) {
+                clauses.add(String.format("goal_%s_%d", role, reward));
+            } else {
+                clauses.add(String.format("!goal_%s_%d", role, reward));
+            }
+        }
+        return "(" + String.join(" and ", clauses) + ")";
+    }
+
+    private String strongWinnabilityFormula() {
+        List<String> clauses = new ArrayList<>();
+        for (String role : roles) {
+            clauses.add(String.format("<%s> F (Environment.RedStates and goal_%s_%d)", role, role, roleToGoalRewards.get(role).last()));
+        }
+        return String.join("\nor ", clauses);
+    }
+
+    private String weakWinnabilityFormula() {
+        List<String> clauses = new ArrayList<>();
+        for (String role : roles) {
+            clauses.add(String.format("<allAgents> F (Environment.RedStates and goal_%s_%d)", role, roleToGoalRewards.get(role).last()));
+        }
+        return String.join("\nand ", clauses);
+    }
+
+    private String fairnessFormula() {
+        List<String> clauses = new ArrayList<>();
+        for (String role : roles) {
+            clauses.add(String.format("<%s> F (Environment.RedStates and (!goal_%s_%d))", role, role, roleToGoalRewards.get(role).first()));
+        }
+        return String.join("\nand ", clauses);
     }
 
     private void formatEvaluation() {
@@ -228,10 +310,16 @@ public class IsplDescriptionFactory {
             GdlSentence head = r.getHead();
             List<GdlLiteral> body = r.getBody();
             String goal = translateSentence(head);
+            String role = head.get(0).toString();
+            int reward = Integer.parseInt(head.get(1).toString());
+
             goalToConditions.putIfAbsent(goal, new ArrayList<>());
             String exlit = expandLiterals(body);
             if (!exlit.equals("FALSE"))
                 goalToConditions.get(goal).add(expandLiterals(body));
+
+            roleToGoalRewards.putIfAbsent(role, new TreeSet<>());
+            roleToGoalRewards.get(role).add(reward);
         }
     }
 

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Translator {
     public static void main(String[] args) throws Exception {
-        String gameName = "firefighter";
+        String gameName = "haystack";
         String filename = "D:\\mcmas\\mcmas-1.3.0\\gdl\\" + gameName + ".kif";
         Game theGame = Game.createEphemeralGame(Game.preprocessRulesheet(FileUtils.readFileAsString(new File(filename))));
 
