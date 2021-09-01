@@ -1,0 +1,156 @@
+Semantics = SingleAssignment;
+Agent Environment
+  Obsvars:
+    table_a : boolean;
+    on_a_b : boolean;
+    clear_c : boolean;
+    on_b_a : boolean;
+    clear_b : boolean;
+    on_c_a : boolean;
+    table_b : boolean;
+    on_b_b : boolean;
+    on_a_c : boolean;
+    on_c_b : boolean;
+    on_b_c : boolean;
+    table_c : boolean;
+    on_c_c : boolean;
+    on_a_a : boolean;
+    step_4 : boolean;
+    step_3 : boolean;
+    step_2 : boolean;
+    step_1 : boolean;
+    clear_a : boolean;
+    dummyvar : boolean;
+  end Obsvars
+  Vars:
+  end Vars
+  RedStates:
+    ((on_a_b=true) and (on_b_c=true)) or ((step_4=true));
+  end RedStates
+  Actions={noop};
+  Protocol:
+  end Protocol
+  Evolution:
+    table_a=true if ((robot.Action=u_a_b)) or ((robot.Action=s_c_c) and (table_a=true)) or ((robot.Action=s_c_a) and (table_a=true)) or ((robot.Action=u_c_a) and (table_a=true)) or ((robot.Action=u_b_a) and (table_a=true)) or ((robot.Action=s_c_b) and (table_a=true)) or ((robot.Action=u_a_a)) or ((robot.Action=s_b_b) and (table_a=true)) or ((robot.Action=u_a_a) and (table_a=true)) or ((robot.Action=u_a_c) and (table_a=true)) or ((robot.Action=u_b_b) and (table_a=true)) or ((robot.Action=u_a_c)) or ((robot.Action=u_a_b) and (table_a=true)) or ((robot.Action=u_b_c) and (table_a=true)) or ((robot.Action=s_b_a) and (table_a=true)) or ((robot.Action=s_b_c) and (table_a=true)) or ((robot.Action=u_c_c) and (table_a=true)) or ((robot.Action=u_c_b) and (table_a=true)) ;
+    table_a=false if !( ((robot.Action=u_a_b)) or ((robot.Action=s_c_c) and (table_a=true)) or ((robot.Action=s_c_a) and (table_a=true)) or ((robot.Action=u_c_a) and (table_a=true)) or ((robot.Action=u_b_a) and (table_a=true)) or ((robot.Action=s_c_b) and (table_a=true)) or ((robot.Action=u_a_a)) or ((robot.Action=s_b_b) and (table_a=true)) or ((robot.Action=u_a_a) and (table_a=true)) or ((robot.Action=u_a_c) and (table_a=true)) or ((robot.Action=u_b_b) and (table_a=true)) or ((robot.Action=u_a_c)) or ((robot.Action=u_a_b) and (table_a=true)) or ((robot.Action=u_b_c) and (table_a=true)) or ((robot.Action=s_b_a) and (table_a=true)) or ((robot.Action=s_b_c) and (table_a=true)) or ((robot.Action=u_c_c) and (table_a=true)) or ((robot.Action=u_c_b) and (table_a=true)) ) ;
+    on_a_b=true if ((robot.Action=s_b_b) and (on_a_b=true)) or ((robot.Action=u_b_b) and (on_a_b=true)) or ((robot.Action=s_a_c) and (on_a_b=true)) or ((robot.Action=u_b_c) and (on_a_b=true)) or ((robot.Action=s_c_c) and (on_a_b=true)) or ((robot.Action=u_b_a) and (on_a_b=true)) or ((robot.Action=u_c_c) and (on_a_b=true)) or ((robot.Action=s_a_a) and (on_a_b=true)) or ((robot.Action=s_c_b) and (on_a_b=true)) or ((robot.Action=s_c_a) and (on_a_b=true)) or ((robot.Action=u_c_b) and (on_a_b=true)) or ((robot.Action=s_a_b)) or ((robot.Action=u_c_a) and (on_a_b=true)) or ((robot.Action=s_b_c) and (on_a_b=true)) or ((robot.Action=s_a_b) and (on_a_b=true)) or ((robot.Action=s_b_a) and (on_a_b=true)) ;
+    on_a_b=false if !( ((robot.Action=s_b_b) and (on_a_b=true)) or ((robot.Action=u_b_b) and (on_a_b=true)) or ((robot.Action=s_a_c) and (on_a_b=true)) or ((robot.Action=u_b_c) and (on_a_b=true)) or ((robot.Action=s_c_c) and (on_a_b=true)) or ((robot.Action=u_b_a) and (on_a_b=true)) or ((robot.Action=u_c_c) and (on_a_b=true)) or ((robot.Action=s_a_a) and (on_a_b=true)) or ((robot.Action=s_c_b) and (on_a_b=true)) or ((robot.Action=s_c_a) and (on_a_b=true)) or ((robot.Action=u_c_b) and (on_a_b=true)) or ((robot.Action=s_a_b)) or ((robot.Action=u_c_a) and (on_a_b=true)) or ((robot.Action=s_b_c) and (on_a_b=true)) or ((robot.Action=s_a_b) and (on_a_b=true)) or ((robot.Action=s_b_a) and (on_a_b=true)) ) ;
+    clear_c=true if ((robot.Action=u_a_c) and (clear_c=true)) or ((robot.Action=u_c_a) and (clear_c=true)) or ((robot.Action=s_a_a) and (clear_c=true)) or ((robot.Action=u_a_a) and (clear_c=true)) or ((robot.Action=u_b_a) and (clear_c=true)) or ((robot.Action=s_b_b) and (clear_c=true)) or ((robot.Action=u_c_c)) or ((robot.Action=s_a_b) and (clear_c=true)) or ((robot.Action=u_a_b) and (clear_c=true)) or ((robot.Action=u_c_b) and (clear_c=true)) or ((robot.Action=u_a_c)) or ((robot.Action=u_b_c) and (clear_c=true)) or ((robot.Action=s_b_a) and (clear_c=true)) or ((robot.Action=s_c_b) and (clear_c=true)) or ((robot.Action=u_b_c)) or ((robot.Action=s_c_a) and (clear_c=true)) or ((robot.Action=u_c_c) and (clear_c=true)) or ((robot.Action=u_b_b) and (clear_c=true)) ;
+    clear_c=false if !( ((robot.Action=u_a_c) and (clear_c=true)) or ((robot.Action=u_c_a) and (clear_c=true)) or ((robot.Action=s_a_a) and (clear_c=true)) or ((robot.Action=u_a_a) and (clear_c=true)) or ((robot.Action=u_b_a) and (clear_c=true)) or ((robot.Action=s_b_b) and (clear_c=true)) or ((robot.Action=u_c_c)) or ((robot.Action=s_a_b) and (clear_c=true)) or ((robot.Action=u_a_b) and (clear_c=true)) or ((robot.Action=u_c_b) and (clear_c=true)) or ((robot.Action=u_a_c)) or ((robot.Action=u_b_c) and (clear_c=true)) or ((robot.Action=s_b_a) and (clear_c=true)) or ((robot.Action=s_c_b) and (clear_c=true)) or ((robot.Action=u_b_c)) or ((robot.Action=s_c_a) and (clear_c=true)) or ((robot.Action=u_c_c) and (clear_c=true)) or ((robot.Action=u_b_b) and (clear_c=true)) ) ;
+    on_b_a=true if ((robot.Action=u_a_b) and (on_b_a=true)) or ((robot.Action=u_c_c) and (on_b_a=true)) or ((robot.Action=s_c_b) and (on_b_a=true)) or ((robot.Action=s_b_b) and (on_b_a=true)) or ((robot.Action=s_b_a) and (on_b_a=true)) or ((robot.Action=u_c_b) and (on_b_a=true)) or ((robot.Action=s_a_b) and (on_b_a=true)) or ((robot.Action=s_c_a) and (on_b_a=true)) or ((robot.Action=u_a_c) and (on_b_a=true)) or ((robot.Action=s_b_c) and (on_b_a=true)) or ((robot.Action=s_c_c) and (on_b_a=true)) or ((robot.Action=s_a_c) and (on_b_a=true)) or ((robot.Action=u_a_a) and (on_b_a=true)) or ((robot.Action=s_a_a) and (on_b_a=true)) or ((robot.Action=s_b_a)) or ((robot.Action=u_c_a) and (on_b_a=true)) ;
+    on_b_a=false if !( ((robot.Action=u_a_b) and (on_b_a=true)) or ((robot.Action=u_c_c) and (on_b_a=true)) or ((robot.Action=s_c_b) and (on_b_a=true)) or ((robot.Action=s_b_b) and (on_b_a=true)) or ((robot.Action=s_b_a) and (on_b_a=true)) or ((robot.Action=u_c_b) and (on_b_a=true)) or ((robot.Action=s_a_b) and (on_b_a=true)) or ((robot.Action=s_c_a) and (on_b_a=true)) or ((robot.Action=u_a_c) and (on_b_a=true)) or ((robot.Action=s_b_c) and (on_b_a=true)) or ((robot.Action=s_c_c) and (on_b_a=true)) or ((robot.Action=s_a_c) and (on_b_a=true)) or ((robot.Action=u_a_a) and (on_b_a=true)) or ((robot.Action=s_a_a) and (on_b_a=true)) or ((robot.Action=s_b_a)) or ((robot.Action=u_c_a) and (on_b_a=true)) ) ;
+    clear_b=true if ((robot.Action=s_b_c) and (clear_b=true)) or ((robot.Action=s_a_c) and (clear_b=true)) or ((robot.Action=u_c_c) and (clear_b=true)) or ((robot.Action=u_a_b)) or ((robot.Action=u_b_a) and (clear_b=true)) or ((robot.Action=s_c_c) and (clear_b=true)) or ((robot.Action=u_b_b)) or ((robot.Action=u_b_b) and (clear_b=true)) or ((robot.Action=s_a_a) and (clear_b=true)) or ((robot.Action=u_a_c) and (clear_b=true)) or ((robot.Action=u_c_a) and (clear_b=true)) or ((robot.Action=s_c_a) and (clear_b=true)) or ((robot.Action=u_b_c) and (clear_b=true)) or ((robot.Action=s_b_a) and (clear_b=true)) or ((robot.Action=u_a_b) and (clear_b=true)) or ((robot.Action=u_c_b) and (clear_b=true)) or ((robot.Action=u_a_a) and (clear_b=true)) or ((robot.Action=u_c_b)) ;
+    clear_b=false if !( ((robot.Action=s_b_c) and (clear_b=true)) or ((robot.Action=s_a_c) and (clear_b=true)) or ((robot.Action=u_c_c) and (clear_b=true)) or ((robot.Action=u_a_b)) or ((robot.Action=u_b_a) and (clear_b=true)) or ((robot.Action=s_c_c) and (clear_b=true)) or ((robot.Action=u_b_b)) or ((robot.Action=u_b_b) and (clear_b=true)) or ((robot.Action=s_a_a) and (clear_b=true)) or ((robot.Action=u_a_c) and (clear_b=true)) or ((robot.Action=u_c_a) and (clear_b=true)) or ((robot.Action=s_c_a) and (clear_b=true)) or ((robot.Action=u_b_c) and (clear_b=true)) or ((robot.Action=s_b_a) and (clear_b=true)) or ((robot.Action=u_a_b) and (clear_b=true)) or ((robot.Action=u_c_b) and (clear_b=true)) or ((robot.Action=u_a_a) and (clear_b=true)) or ((robot.Action=u_c_b)) ) ;
+    on_c_a=true if ((robot.Action=u_b_b) and (on_c_a=true)) or ((robot.Action=s_c_a)) or ((robot.Action=u_b_c) and (on_c_a=true)) or ((robot.Action=s_a_a) and (on_c_a=true)) or ((robot.Action=s_c_b) and (on_c_a=true)) or ((robot.Action=s_a_c) and (on_c_a=true)) or ((robot.Action=u_b_a) and (on_c_a=true)) or ((robot.Action=u_a_b) and (on_c_a=true)) or ((robot.Action=s_b_c) and (on_c_a=true)) or ((robot.Action=u_a_c) and (on_c_a=true)) or ((robot.Action=s_a_b) and (on_c_a=true)) or ((robot.Action=s_b_b) and (on_c_a=true)) or ((robot.Action=s_c_a) and (on_c_a=true)) or ((robot.Action=s_b_a) and (on_c_a=true)) or ((robot.Action=u_a_a) and (on_c_a=true)) or ((robot.Action=s_c_c) and (on_c_a=true)) ;
+    on_c_a=false if !( ((robot.Action=u_b_b) and (on_c_a=true)) or ((robot.Action=s_c_a)) or ((robot.Action=u_b_c) and (on_c_a=true)) or ((robot.Action=s_a_a) and (on_c_a=true)) or ((robot.Action=s_c_b) and (on_c_a=true)) or ((robot.Action=s_a_c) and (on_c_a=true)) or ((robot.Action=u_b_a) and (on_c_a=true)) or ((robot.Action=u_a_b) and (on_c_a=true)) or ((robot.Action=s_b_c) and (on_c_a=true)) or ((robot.Action=u_a_c) and (on_c_a=true)) or ((robot.Action=s_a_b) and (on_c_a=true)) or ((robot.Action=s_b_b) and (on_c_a=true)) or ((robot.Action=s_c_a) and (on_c_a=true)) or ((robot.Action=s_b_a) and (on_c_a=true)) or ((robot.Action=u_a_a) and (on_c_a=true)) or ((robot.Action=s_c_c) and (on_c_a=true)) ) ;
+    table_b=true if ((robot.Action=s_c_b) and (table_b=true)) or ((robot.Action=u_c_c) and (table_b=true)) or ((robot.Action=s_c_c) and (table_b=true)) or ((robot.Action=u_c_a) and (table_b=true)) or ((robot.Action=u_a_a) and (table_b=true)) or ((robot.Action=s_a_a) and (table_b=true)) or ((robot.Action=u_b_c) and (table_b=true)) or ((robot.Action=s_c_a) and (table_b=true)) or ((robot.Action=u_c_b) and (table_b=true)) or ((robot.Action=u_b_b) and (table_b=true)) or ((robot.Action=u_b_a) and (table_b=true)) or ((robot.Action=u_b_b)) or ((robot.Action=u_a_c) and (table_b=true)) or ((robot.Action=s_a_c) and (table_b=true)) or ((robot.Action=s_a_b) and (table_b=true)) or ((robot.Action=u_b_a)) or ((robot.Action=u_a_b) and (table_b=true)) or ((robot.Action=u_b_c)) ;
+    table_b=false if !( ((robot.Action=s_c_b) and (table_b=true)) or ((robot.Action=u_c_c) and (table_b=true)) or ((robot.Action=s_c_c) and (table_b=true)) or ((robot.Action=u_c_a) and (table_b=true)) or ((robot.Action=u_a_a) and (table_b=true)) or ((robot.Action=s_a_a) and (table_b=true)) or ((robot.Action=u_b_c) and (table_b=true)) or ((robot.Action=s_c_a) and (table_b=true)) or ((robot.Action=u_c_b) and (table_b=true)) or ((robot.Action=u_b_b) and (table_b=true)) or ((robot.Action=u_b_a) and (table_b=true)) or ((robot.Action=u_b_b)) or ((robot.Action=u_a_c) and (table_b=true)) or ((robot.Action=s_a_c) and (table_b=true)) or ((robot.Action=s_a_b) and (table_b=true)) or ((robot.Action=u_b_a)) or ((robot.Action=u_a_b) and (table_b=true)) or ((robot.Action=u_b_c)) ) ;
+    on_b_b=true if ((robot.Action=u_a_c) and (on_b_b=true)) or ((robot.Action=s_b_a) and (on_b_b=true)) or ((robot.Action=s_a_c) and (on_b_b=true)) or ((robot.Action=u_a_b) and (on_b_b=true)) or ((robot.Action=s_a_b) and (on_b_b=true)) or ((robot.Action=u_c_a) and (on_b_b=true)) or ((robot.Action=u_c_c) and (on_b_b=true)) or ((robot.Action=s_c_b) and (on_b_b=true)) or ((robot.Action=s_c_a) and (on_b_b=true)) or ((robot.Action=s_a_a) and (on_b_b=true)) or ((robot.Action=s_b_b)) or ((robot.Action=u_c_b) and (on_b_b=true)) or ((robot.Action=u_a_a) and (on_b_b=true)) or ((robot.Action=s_b_c) and (on_b_b=true)) or ((robot.Action=s_b_b) and (on_b_b=true)) or ((robot.Action=s_c_c) and (on_b_b=true)) ;
+    on_b_b=false if !( ((robot.Action=u_a_c) and (on_b_b=true)) or ((robot.Action=s_b_a) and (on_b_b=true)) or ((robot.Action=s_a_c) and (on_b_b=true)) or ((robot.Action=u_a_b) and (on_b_b=true)) or ((robot.Action=s_a_b) and (on_b_b=true)) or ((robot.Action=u_c_a) and (on_b_b=true)) or ((robot.Action=u_c_c) and (on_b_b=true)) or ((robot.Action=s_c_b) and (on_b_b=true)) or ((robot.Action=s_c_a) and (on_b_b=true)) or ((robot.Action=s_a_a) and (on_b_b=true)) or ((robot.Action=s_b_b)) or ((robot.Action=u_c_b) and (on_b_b=true)) or ((robot.Action=u_a_a) and (on_b_b=true)) or ((robot.Action=s_b_c) and (on_b_b=true)) or ((robot.Action=s_b_b) and (on_b_b=true)) or ((robot.Action=s_c_c) and (on_b_b=true)) ) ;
+    on_a_c=true if ((robot.Action=s_c_c) and (on_a_c=true)) or ((robot.Action=u_b_c) and (on_a_c=true)) or ((robot.Action=s_a_c)) or ((robot.Action=u_c_b) and (on_a_c=true)) or ((robot.Action=s_a_c) and (on_a_c=true)) or ((robot.Action=u_b_b) and (on_a_c=true)) or ((robot.Action=u_b_a) and (on_a_c=true)) or ((robot.Action=s_c_b) and (on_a_c=true)) or ((robot.Action=s_b_a) and (on_a_c=true)) or ((robot.Action=s_b_c) and (on_a_c=true)) or ((robot.Action=u_c_a) and (on_a_c=true)) or ((robot.Action=u_c_c) and (on_a_c=true)) or ((robot.Action=s_a_a) and (on_a_c=true)) or ((robot.Action=s_a_b) and (on_a_c=true)) or ((robot.Action=s_b_b) and (on_a_c=true)) or ((robot.Action=s_c_a) and (on_a_c=true)) ;
+    on_a_c=false if !( ((robot.Action=s_c_c) and (on_a_c=true)) or ((robot.Action=u_b_c) and (on_a_c=true)) or ((robot.Action=s_a_c)) or ((robot.Action=u_c_b) and (on_a_c=true)) or ((robot.Action=s_a_c) and (on_a_c=true)) or ((robot.Action=u_b_b) and (on_a_c=true)) or ((robot.Action=u_b_a) and (on_a_c=true)) or ((robot.Action=s_c_b) and (on_a_c=true)) or ((robot.Action=s_b_a) and (on_a_c=true)) or ((robot.Action=s_b_c) and (on_a_c=true)) or ((robot.Action=u_c_a) and (on_a_c=true)) or ((robot.Action=u_c_c) and (on_a_c=true)) or ((robot.Action=s_a_a) and (on_a_c=true)) or ((robot.Action=s_a_b) and (on_a_c=true)) or ((robot.Action=s_b_b) and (on_a_c=true)) or ((robot.Action=s_c_a) and (on_a_c=true)) ) ;
+    on_c_b=true if ((robot.Action=s_c_b)) or ((robot.Action=u_b_b) and (on_c_b=true)) or ((robot.Action=s_c_a) and (on_c_b=true)) or ((robot.Action=s_a_c) and (on_c_b=true)) or ((robot.Action=s_b_a) and (on_c_b=true)) or ((robot.Action=s_b_b) and (on_c_b=true)) or ((robot.Action=s_c_b) and (on_c_b=true)) or ((robot.Action=u_a_b) and (on_c_b=true)) or ((robot.Action=u_a_c) and (on_c_b=true)) or ((robot.Action=s_a_a) and (on_c_b=true)) or ((robot.Action=s_b_c) and (on_c_b=true)) or ((robot.Action=s_a_b) and (on_c_b=true)) or ((robot.Action=s_c_c) and (on_c_b=true)) or ((robot.Action=u_a_a) and (on_c_b=true)) or ((robot.Action=u_b_c) and (on_c_b=true)) or ((robot.Action=u_b_a) and (on_c_b=true)) ;
+    on_c_b=false if !( ((robot.Action=s_c_b)) or ((robot.Action=u_b_b) and (on_c_b=true)) or ((robot.Action=s_c_a) and (on_c_b=true)) or ((robot.Action=s_a_c) and (on_c_b=true)) or ((robot.Action=s_b_a) and (on_c_b=true)) or ((robot.Action=s_b_b) and (on_c_b=true)) or ((robot.Action=s_c_b) and (on_c_b=true)) or ((robot.Action=u_a_b) and (on_c_b=true)) or ((robot.Action=u_a_c) and (on_c_b=true)) or ((robot.Action=s_a_a) and (on_c_b=true)) or ((robot.Action=s_b_c) and (on_c_b=true)) or ((robot.Action=s_a_b) and (on_c_b=true)) or ((robot.Action=s_c_c) and (on_c_b=true)) or ((robot.Action=u_a_a) and (on_c_b=true)) or ((robot.Action=u_b_c) and (on_c_b=true)) or ((robot.Action=u_b_a) and (on_c_b=true)) ) ;
+    on_b_c=true if ((robot.Action=u_a_b) and (on_b_c=true)) or ((robot.Action=s_b_b) and (on_b_c=true)) or ((robot.Action=u_c_c) and (on_b_c=true)) or ((robot.Action=s_b_a) and (on_b_c=true)) or ((robot.Action=s_a_c) and (on_b_c=true)) or ((robot.Action=u_c_a) and (on_b_c=true)) or ((robot.Action=s_a_b) and (on_b_c=true)) or ((robot.Action=u_c_b) and (on_b_c=true)) or ((robot.Action=s_c_b) and (on_b_c=true)) or ((robot.Action=s_a_a) and (on_b_c=true)) or ((robot.Action=u_a_a) and (on_b_c=true)) or ((robot.Action=s_c_c) and (on_b_c=true)) or ((robot.Action=s_c_a) and (on_b_c=true)) or ((robot.Action=s_b_c) and (on_b_c=true)) or ((robot.Action=u_a_c) and (on_b_c=true)) or ((robot.Action=s_b_c)) ;
+    on_b_c=false if !( ((robot.Action=u_a_b) and (on_b_c=true)) or ((robot.Action=s_b_b) and (on_b_c=true)) or ((robot.Action=u_c_c) and (on_b_c=true)) or ((robot.Action=s_b_a) and (on_b_c=true)) or ((robot.Action=s_a_c) and (on_b_c=true)) or ((robot.Action=u_c_a) and (on_b_c=true)) or ((robot.Action=s_a_b) and (on_b_c=true)) or ((robot.Action=u_c_b) and (on_b_c=true)) or ((robot.Action=s_c_b) and (on_b_c=true)) or ((robot.Action=s_a_a) and (on_b_c=true)) or ((robot.Action=u_a_a) and (on_b_c=true)) or ((robot.Action=s_c_c) and (on_b_c=true)) or ((robot.Action=s_c_a) and (on_b_c=true)) or ((robot.Action=s_b_c) and (on_b_c=true)) or ((robot.Action=u_a_c) and (on_b_c=true)) or ((robot.Action=s_b_c)) ) ;
+    table_c=true if ((robot.Action=u_c_a) and (table_c=true)) or ((robot.Action=u_c_b) and (table_c=true)) or ((robot.Action=s_a_b) and (table_c=true)) or ((robot.Action=u_c_a)) or ((robot.Action=u_c_b)) or ((robot.Action=u_b_b) and (table_c=true)) or ((robot.Action=u_a_a) and (table_c=true)) or ((robot.Action=s_a_c) and (table_c=true)) or ((robot.Action=s_b_a) and (table_c=true)) or ((robot.Action=u_b_c) and (table_c=true)) or ((robot.Action=u_c_c) and (table_c=true)) or ((robot.Action=s_b_c) and (table_c=true)) or ((robot.Action=u_c_c)) or ((robot.Action=u_a_c) and (table_c=true)) or ((robot.Action=s_a_a) and (table_c=true)) or ((robot.Action=u_a_b) and (table_c=true)) or ((robot.Action=s_b_b) and (table_c=true)) or ((robot.Action=u_b_a) and (table_c=true)) ;
+    table_c=false if !( ((robot.Action=u_c_a) and (table_c=true)) or ((robot.Action=u_c_b) and (table_c=true)) or ((robot.Action=s_a_b) and (table_c=true)) or ((robot.Action=u_c_a)) or ((robot.Action=u_c_b)) or ((robot.Action=u_b_b) and (table_c=true)) or ((robot.Action=u_a_a) and (table_c=true)) or ((robot.Action=s_a_c) and (table_c=true)) or ((robot.Action=s_b_a) and (table_c=true)) or ((robot.Action=u_b_c) and (table_c=true)) or ((robot.Action=u_c_c) and (table_c=true)) or ((robot.Action=s_b_c) and (table_c=true)) or ((robot.Action=u_c_c)) or ((robot.Action=u_a_c) and (table_c=true)) or ((robot.Action=s_a_a) and (table_c=true)) or ((robot.Action=u_a_b) and (table_c=true)) or ((robot.Action=s_b_b) and (table_c=true)) or ((robot.Action=u_b_a) and (table_c=true)) ) ;
+    on_c_c=true if ((robot.Action=u_a_c) and (on_c_c=true)) or ((robot.Action=u_b_b) and (on_c_c=true)) or ((robot.Action=s_b_a) and (on_c_c=true)) or ((robot.Action=u_a_b) and (on_c_c=true)) or ((robot.Action=u_b_c) and (on_c_c=true)) or ((robot.Action=s_c_c)) or ((robot.Action=s_c_b) and (on_c_c=true)) or ((robot.Action=s_a_a) and (on_c_c=true)) or ((robot.Action=s_b_b) and (on_c_c=true)) or ((robot.Action=s_c_a) and (on_c_c=true)) or ((robot.Action=u_b_a) and (on_c_c=true)) or ((robot.Action=s_b_c) and (on_c_c=true)) or ((robot.Action=s_c_c) and (on_c_c=true)) or ((robot.Action=u_a_a) and (on_c_c=true)) or ((robot.Action=s_a_b) and (on_c_c=true)) or ((robot.Action=s_a_c) and (on_c_c=true)) ;
+    on_c_c=false if !( ((robot.Action=u_a_c) and (on_c_c=true)) or ((robot.Action=u_b_b) and (on_c_c=true)) or ((robot.Action=s_b_a) and (on_c_c=true)) or ((robot.Action=u_a_b) and (on_c_c=true)) or ((robot.Action=u_b_c) and (on_c_c=true)) or ((robot.Action=s_c_c)) or ((robot.Action=s_c_b) and (on_c_c=true)) or ((robot.Action=s_a_a) and (on_c_c=true)) or ((robot.Action=s_b_b) and (on_c_c=true)) or ((robot.Action=s_c_a) and (on_c_c=true)) or ((robot.Action=u_b_a) and (on_c_c=true)) or ((robot.Action=s_b_c) and (on_c_c=true)) or ((robot.Action=s_c_c) and (on_c_c=true)) or ((robot.Action=u_a_a) and (on_c_c=true)) or ((robot.Action=s_a_b) and (on_c_c=true)) or ((robot.Action=s_a_c) and (on_c_c=true)) ) ;
+    on_a_a=true if ((robot.Action=u_c_b) and (on_a_a=true)) or ((robot.Action=s_a_b) and (on_a_a=true)) or ((robot.Action=u_b_c) and (on_a_a=true)) or ((robot.Action=s_a_a) and (on_a_a=true)) or ((robot.Action=u_b_b) and (on_a_a=true)) or ((robot.Action=s_c_b) and (on_a_a=true)) or ((robot.Action=s_a_c) and (on_a_a=true)) or ((robot.Action=u_c_a) and (on_a_a=true)) or ((robot.Action=s_b_a) and (on_a_a=true)) or ((robot.Action=s_c_c) and (on_a_a=true)) or ((robot.Action=u_b_a) and (on_a_a=true)) or ((robot.Action=u_c_c) and (on_a_a=true)) or ((robot.Action=s_c_a) and (on_a_a=true)) or ((robot.Action=s_b_c) and (on_a_a=true)) or ((robot.Action=s_b_b) and (on_a_a=true)) or ((robot.Action=s_a_a)) ;
+    on_a_a=false if !( ((robot.Action=u_c_b) and (on_a_a=true)) or ((robot.Action=s_a_b) and (on_a_a=true)) or ((robot.Action=u_b_c) and (on_a_a=true)) or ((robot.Action=s_a_a) and (on_a_a=true)) or ((robot.Action=u_b_b) and (on_a_a=true)) or ((robot.Action=s_c_b) and (on_a_a=true)) or ((robot.Action=s_a_c) and (on_a_a=true)) or ((robot.Action=u_c_a) and (on_a_a=true)) or ((robot.Action=s_b_a) and (on_a_a=true)) or ((robot.Action=s_c_c) and (on_a_a=true)) or ((robot.Action=u_b_a) and (on_a_a=true)) or ((robot.Action=u_c_c) and (on_a_a=true)) or ((robot.Action=s_c_a) and (on_a_a=true)) or ((robot.Action=s_b_c) and (on_a_a=true)) or ((robot.Action=s_b_b) and (on_a_a=true)) or ((robot.Action=s_a_a)) ) ;
+    step_4=true if ((step_3=true)) ;
+    step_4=false if !( ((step_3=true)) ) ;
+    step_3=true if ((step_2=true)) ;
+    step_3=false if !( ((step_2=true)) ) ;
+    step_2=true if ((step_1=true)) ;
+    step_2=false if !( ((step_1=true)) ) ;
+    clear_a=true if ((robot.Action=u_c_b) and (clear_a=true)) or ((robot.Action=u_b_b) and (clear_a=true)) or ((robot.Action=u_c_a)) or ((robot.Action=u_b_a) and (clear_a=true)) or ((robot.Action=u_a_b) and (clear_a=true)) or ((robot.Action=u_b_a)) or ((robot.Action=u_c_a) and (clear_a=true)) or ((robot.Action=u_c_c) and (clear_a=true)) or ((robot.Action=s_a_c) and (clear_a=true)) or ((robot.Action=u_a_a)) or ((robot.Action=u_b_c) and (clear_a=true)) or ((robot.Action=s_c_b) and (clear_a=true)) or ((robot.Action=s_a_b) and (clear_a=true)) or ((robot.Action=s_b_c) and (clear_a=true)) or ((robot.Action=u_a_a) and (clear_a=true)) or ((robot.Action=s_b_b) and (clear_a=true)) or ((robot.Action=s_c_c) and (clear_a=true)) or ((robot.Action=u_a_c) and (clear_a=true)) ;
+    clear_a=false if !( ((robot.Action=u_c_b) and (clear_a=true)) or ((robot.Action=u_b_b) and (clear_a=true)) or ((robot.Action=u_c_a)) or ((robot.Action=u_b_a) and (clear_a=true)) or ((robot.Action=u_a_b) and (clear_a=true)) or ((robot.Action=u_b_a)) or ((robot.Action=u_c_a) and (clear_a=true)) or ((robot.Action=u_c_c) and (clear_a=true)) or ((robot.Action=s_a_c) and (clear_a=true)) or ((robot.Action=u_a_a)) or ((robot.Action=u_b_c) and (clear_a=true)) or ((robot.Action=s_c_b) and (clear_a=true)) or ((robot.Action=s_a_b) and (clear_a=true)) or ((robot.Action=s_b_c) and (clear_a=true)) or ((robot.Action=u_a_a) and (clear_a=true)) or ((robot.Action=s_b_b) and (clear_a=true)) or ((robot.Action=s_c_c) and (clear_a=true)) or ((robot.Action=u_a_c) and (clear_a=true)) ) ;
+    dummyvar=true if dummyvar=dummyvar ;
+  end Evolution
+end Agent
+
+Agent robot
+  Vars:
+    dummyvar : boolean;
+  end Vars
+  Actions = {u_c_c, u_c_b, u_b_c, u_a_a, u_b_b, u_a_c, u_c_a, u_b_a, u_a_b, s_a_a, s_c_a, s_a_c, s_b_b, s_b_a, s_a_b, s_c_c, s_c_b, s_b_c};
+  Protocol:
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( (Environment.clear_b=true) and (Environment.on_b_b=true) ) ) : { u_b_b };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( (Environment.clear_a=true) and (Environment.on_a_a=true) ) ) : { u_a_a };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( (Environment.clear_c=true) and (Environment.on_c_b=true) ) ) : { u_c_b };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( (Environment.clear_b=true) and (Environment.on_b_a=true) ) ) : { u_b_a };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( (Environment.clear_c=true) and (Environment.table_c=true) and (Environment.clear_a=true) ) ) : { s_c_a };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( (Environment.clear_a=true) and (Environment.on_a_b=true) ) ) : { u_a_b };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( !(dummyvar=dummyvar) ) ) : { s_a_a };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( (Environment.clear_a=true) and (Environment.table_a=true) and (Environment.clear_c=true) ) ) : { s_a_c };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( !(dummyvar=dummyvar) ) ) : { s_b_b };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( (Environment.clear_b=true) and (Environment.on_b_c=true) ) ) : { u_b_c };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( (Environment.clear_a=true) and (Environment.on_a_c=true) ) ) : { u_a_c };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( (Environment.clear_c=true) and (Environment.on_c_c=true) ) ) : { u_c_c };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( (Environment.clear_c=true) and (Environment.table_c=true) and (Environment.clear_b=true) ) ) : { s_c_b };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( !(dummyvar=dummyvar) ) ) : { s_c_c };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( (Environment.clear_c=true) and (Environment.on_c_a=true) ) ) : { u_c_a };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( (Environment.clear_b=true) and (Environment.table_b=true) and (Environment.clear_c=true) ) ) : { s_b_c };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( (Environment.clear_b=true) and (Environment.table_b=true) and (Environment.clear_a=true) ) ) : { s_b_a };
+    ( !( ((Environment.on_a_b=true) and (Environment.on_b_c=true)) or ((Environment.step_4=true)) ) and ( (Environment.clear_a=true) and (Environment.table_a=true) and (Environment.clear_b=true) ) ) : { s_a_b };
+  end Protocol
+  Evolution:
+    dummyvar=true if dummyvar=dummyvar;
+  end Evolution
+end Agent
+
+Evaluation
+    goal_robot_0 if ((!(Environment.on_a_b=true))) or ((!(Environment.on_b_c=true))) ;
+    goal_robot_100 if ((Environment.on_a_b=true) and (Environment.on_b_c=true)) ;
+end Evaluation
+
+InitStates
+  Environment.table_a=true and
+  Environment.on_a_b=false and
+  Environment.clear_c=true and
+  Environment.on_b_a=false and
+  Environment.clear_b=true and
+  Environment.on_c_a=true and
+  Environment.table_b=true and
+  Environment.on_b_b=false and
+  Environment.on_a_c=false and
+  Environment.on_c_b=false and
+  Environment.on_b_c=false and
+  Environment.table_c=false and
+  Environment.on_c_c=false and
+  Environment.on_a_a=false and
+  Environment.step_4=false and
+  Environment.step_3=false and
+  Environment.step_2=false and
+  Environment.step_1=true and
+  Environment.clear_a=false and
+  robot.dummyvar=true and
+  Environment.dummyvar=true ;
+end InitStates
+
+Groups
+  g1 = { robot };
+end Groups
+
+Formulae
+  -- Environment.RedStates refers to terminal game states.
+  -- The game must terminate eventually.
+  AF Environment.RedStates ;
+
+  -- Fairness
+  <g1> F ( Environment.RedStates and ( goal_robot_100 ) ) ;
+
+  -- Weak winnability
+  <g1> F ( Environment.RedStates and ( goal_robot_100 ) ) ;
+
+  -- Strong winnability
+  <g1> F ( Environment.RedStates and ( goal_robot_100 ) ) ;
+
+  -- Unique goal
+  AG ( Environment.RedStates -> 
+        ( ( goal_robot_0 and !goal_robot_100 )
+          or ( !goal_robot_0 and goal_robot_100 ) ) ) ;
+
+end Formulae

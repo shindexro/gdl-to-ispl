@@ -14,9 +14,10 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws Exception {
         String inFilePath, outFilePath;
-        if (args.length == 3) {
-            inFilePath = args[1];
-            outFilePath = args[2];
+
+        if (args.length == 2) {
+            inFilePath = args[0];
+            outFilePath = args[1];
         } else {
             System.out.println("Usage: java -jar gdl2ispl.jar <path_to_gdl_file> <output_path>");
             System.out.println("Example: java -jar gdl2ispl.jar C:\\Users\\Ian\\Desktop\\connect4.kif C:\\Users\\Ian\\Desktop\\connect4.ispl");
@@ -39,8 +40,8 @@ public class Main {
             System.err.println("GDL validation error: " + e);
             return;
         }
-        System.out.println("Time for GDL validity check: " + (System.nanoTime()-phaseStartTime) / 1000000);
-        phaseStartTime=System.nanoTime();
+        System.out.println("Time for GDL validity check: " + (System.nanoTime() - phaseStartTime) / 1000000 + " ms");
+        phaseStartTime = System.nanoTime();
 
         // Flattening
         List<Gdl> description = theGame.getRules();
@@ -48,17 +49,17 @@ public class Main {
         description = DeORer.run(description);
         PropNetFlattener pf = new PropNetFlattener(description);
         List<GdlRule> flatDescription = pf.flatten();
-        System.out.println("Time for flattening: " + (System.nanoTime()-phaseStartTime) / 1000000);
-        phaseStartTime=System.nanoTime();
+        System.out.println("Time for flattening: " + (System.nanoTime() - phaseStartTime) / 1000000 + " ms");
+        phaseStartTime = System.nanoTime();
 
         // Compile into ISPL
         Translator isplFactory = new Translator(flatDescription);
         String isplDescription = isplFactory.build();
         File outFile = new File(outFilePath);
         FileUtils.writeStringToFile(outFile, isplDescription);
-        System.out.println("Time for ISPL compilation: " + (System.nanoTime()-phaseStartTime) / 1000000);
+        System.out.println("Time for ISPL compilation: " + (System.nanoTime() - phaseStartTime) / 1000000 + " ms");
 
-        System.out.println("Total time elapsed: " + (System.nanoTime()-startTime) / 1000000);
+        System.out.println("Total time elapsed: " + (System.nanoTime() - startTime) / 1000000 + " ms");
     }
 }
 

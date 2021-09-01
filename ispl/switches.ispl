@@ -1,0 +1,154 @@
+Semantics = SingleAssignment;
+Agent Environment
+  Obsvars:
+    red : boolean;
+    green : boolean;
+    bright : boolean;
+    start : boolean;
+    dim : boolean;
+    varend : boolean;
+    off : boolean;
+    on : boolean;
+    dummyvar : boolean;
+  end Obsvars
+  Vars:
+  end Vars
+  RedStates:
+    ((varend=true));
+  end RedStates
+  Actions={noop};
+  Protocol:
+  end Protocol
+  Evolution:
+    red=true if ((white.Action=d) and (green=true)) or ((white.Action=d) and (red=true)) ;
+    red=false if !( ((white.Action=d) and (green=true)) or ((white.Action=d) and (red=true)) ) ;
+    green=true if ((white.Action=c) and (green=true)) or ((white.Action=c) and (red=true)) ;
+    green=false if !( ((white.Action=c) and (green=true)) or ((white.Action=c) and (red=true)) ) ;
+    bright=true if ((blue.Action=e) and (bright=true)) or ((blue.Action=e) and (dim=true)) ;
+    bright=false if !( ((blue.Action=e) and (bright=true)) or ((blue.Action=e) and (dim=true)) ) ;
+    start=true if !dummyvar=dummyvar ;
+    start=false if !( !dummyvar=dummyvar ) ;
+    dim=true if ((blue.Action=f) and (dim=true)) or ((blue.Action=f) and (bright=true)) ;
+    dim=false if !( ((blue.Action=f) and (dim=true)) or ((blue.Action=f) and (bright=true)) ) ;
+    varend=true if ((start=true)) ;
+    varend=false if !( ((start=true)) ) ;
+    off=true if ((red.Action=b) and (on=true)) or ((red.Action=b) and (off=true)) ;
+    off=false if !( ((red.Action=b) and (on=true)) or ((red.Action=b) and (off=true)) ) ;
+    on=true if ((red.Action=a) and (off=true)) or ((red.Action=a) and (on=true)) ;
+    on=false if !( ((red.Action=a) and (off=true)) or ((red.Action=a) and (on=true)) ) ;
+    dummyvar=true if dummyvar=dummyvar ;
+  end Evolution
+end Agent
+
+Agent red
+  Vars:
+    dummyvar : boolean;
+  end Vars
+  Actions = {a, b};
+  Protocol:
+    ( !( ((Environment.varend=true)) ) and ( dummyvar=dummyvar ) ) : { a };
+    ( !( ((Environment.varend=true)) ) and ( dummyvar=dummyvar ) ) : { b };
+  end Protocol
+  Evolution:
+    dummyvar=true if dummyvar=dummyvar;
+  end Evolution
+end Agent
+
+Agent white
+  Vars:
+    dummyvar : boolean;
+  end Vars
+  Actions = {c, d};
+  Protocol:
+    ( !( ((Environment.varend=true)) ) and ( dummyvar=dummyvar ) ) : { d };
+    ( !( ((Environment.varend=true)) ) and ( dummyvar=dummyvar ) ) : { c };
+  end Protocol
+  Evolution:
+    dummyvar=true if dummyvar=dummyvar;
+  end Evolution
+end Agent
+
+Agent blue
+  Vars:
+    dummyvar : boolean;
+  end Vars
+  Actions = {e, f};
+  Protocol:
+    ( !( ((Environment.varend=true)) ) and ( dummyvar=dummyvar ) ) : { e };
+    ( !( ((Environment.varend=true)) ) and ( dummyvar=dummyvar ) ) : { f };
+  end Protocol
+  Evolution:
+    dummyvar=true if dummyvar=dummyvar;
+  end Evolution
+end Agent
+
+Evaluation
+    goal_white_100 if ((Environment.green=true)) ;
+    goal_blue_100 if ((Environment.bright=true)) ;
+    goal_red_100 if ((Environment.on=true)) ;
+    goal_blue_0 if ((Environment.dim=true)) ;
+    goal_red_0 if ((Environment.off=true)) ;
+    goal_white_0 if ((Environment.red=true)) ;
+end Evaluation
+
+InitStates
+  Environment.red=true and
+  Environment.green=false and
+  Environment.bright=false and
+  Environment.start=true and
+  Environment.dim=true and
+  Environment.varend=false and
+  Environment.off=true and
+  Environment.on=false and
+  red.dummyvar=true and
+  white.dummyvar=true and
+  blue.dummyvar=true and
+  Environment.dummyvar=true ;
+end InitStates
+
+Groups
+  red = { red } ;
+  white = { white } ;
+  blue = { blue } ;
+  allAgents = { red, white, blue } ;
+end Groups
+
+Formulae
+  -- Environment.RedStates refers to terminal game states.
+  AF Environment.RedStates;
+
+  -- Fairness
+<red> F (Environment.RedStates and (!goal_red_0))
+and <white> F (Environment.RedStates and (!goal_white_0))
+and <blue> F (Environment.RedStates and (!goal_blue_0)) ;
+
+  -- Weak winnability
+<allAgents> F (Environment.RedStates and goal_red_100)
+and <allAgents> F (Environment.RedStates and goal_white_100)
+and <allAgents> F (Environment.RedStates and goal_blue_100) ;
+
+  -- Strong winnability
+<red> F (Environment.RedStates and goal_red_100)
+or <white> F (Environment.RedStates and goal_white_100)
+or <blue> F (Environment.RedStates and goal_blue_100) ;
+
+  -- Zero-sum
+  AG ( Environment.RedStates -> ( goal_red_100 and goal_blue_100 and goal_white_100 ) )
+    or AG ( Environment.RedStates -> ( goal_red_0 and goal_blue_0 and goal_white_0 ) )
+    or AG ( Environment.RedStates -> ( (goal_red_100 and goal_blue_0 and goal_white_0)
+                                        or (goal_red_0 and goal_blue_100 and goal_white_0)
+                                        or (goal_red_0 and goal_blue_0 and goal_white_100) ) )
+    or AG ( Environment.RedStates -> ( (goal_red_100 and goal_blue_100 and goal_white_0)
+                                        or (goal_red_0 and goal_blue_100 and goal_white_100)
+                                        or (goal_red_100 and goal_blue_0 and goal_white_100) ) ) ;
+
+  -- Unique goal
+AG (Environment.RedStates -> (((goal_red_0 and !goal_red_100) 
+or (!goal_red_0 and goal_red_100))
+and ((goal_white_0 and !goal_white_100) 
+or (!goal_white_0 and goal_white_100))
+and ((goal_blue_0 and !goal_blue_100) 
+or (!goal_blue_0 and goal_blue_100))) ) ;
+
+end Formulae
+
