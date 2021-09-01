@@ -2,7 +2,8 @@
 Translate Game Description Language (GDL) to ISPL, the specification language of the model checker MCMAS.
 
 # How to run
-1. Download the pre-compiled jar file \texttt{gdl2ispl.jar} of the GDL to ISPL translator is included in the software archive. To run the translator, execute the command below:
+1. Download the pre-compiled jar file \texttt{gdl2ispl.jar} of the GDL to ISPL translator is included in the software archive. 
+2. Execute the command below:
 ```
 $ java -jar gdl2ispl.jar <path_to_gdl_file> <output_path>
 ```
